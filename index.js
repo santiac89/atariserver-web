@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { exec } = require('child_process');
+const { spawn, exec } = require('child_process');
 const express = require('express');
 const fs = require('fs');
 
@@ -23,15 +23,17 @@ app.post('/load', (req, res) => {
         exec(`kill -9 ${lastPid}`);
     }
 
-    loadedFile = exec(`atariserver -f /dev/ttyAMA0 -C -s 1 ${file} &`, (error, stdout, stderr) => {
-        if (error) {
-          console.error(`exec error: ${error}`);
-          return;
-        }
-        
-        console.log(`stdout: ${stdout}`);
-        console.error(`stderr: ${stderr}`);
-      }).pid; 
+    const child = spawn('atariserver ', ['-f', '/dev/ttyAMA0', '-C', '-s', '1', file, '&']);
+
+    child.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+    });
+
+    child.on('close', (code) => {
+        console.log(`child process exited with code ${code}`);
+    }); 
+
+    loadedFile = child.pid 
 
     res.send()
 });
