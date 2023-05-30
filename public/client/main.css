@@ -1,0 +1,93 @@
+@font-face {
+    font-family: 'atari';
+    src: url('/client/atari.ttf');
+}
+
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    color: white;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: atari;
+}
+
+#files {
+    font-size: 3vmax;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.files_title {
+    font-size: 4vmax;
+    padding: 20px;
+    border-bottom: 2px solid white;
+}
+
+
+.file {
+    padding: 5px;
+    width: 100%;
+}
+
+.file.selected {
+    background-color: rgb(196, 196, 196);
+    color: black;
+}
+
+.top-panel {
+    font-size: 3vmax;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 10px;
+    background-color: rgb(99, 99, 99);
+}
+
+.top-panel > div {
+    margin: 5px 0;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.controls .turbo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.controls button {
+    font-size: 2vmax;
+    font-family: atari;
+}
+
+.controls #highspeed {
+    margin: 0;
+    padding: 0;
+    transform: scale(6);
+    margin-left: 50px;
+    margin-right: 100px;
+}
+
+#upload_file {
+    display: none;
+}

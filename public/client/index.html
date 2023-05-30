@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link href="client/main.css" rel="stylesheet" type="text/css">
+</html>
+<body id="root">
+    <div class="top-panel">
+        <div id="drive">D1: <span id="selected">NONE</span></div>
+        <div class="controls">
+            <div class="turbo">
+                <label for="highspeed">TURBO</label>
+                <input name="highspeed" type="checkbox" id="highspeed">
+            </div>
+            <button id="reload">RELOAD DRIVE</button>
+            <button id="upload">UPLOAD FILE</button>
+            <input type="file" id="upload_file" name="upload_file" accept=".atr,.xex">
+        </div>
+        <div class="status">STATUS: <span id="status"></span></div>
+    </div>
+    <div class="files_title">FILES</div>
+    <div id="files">
+
+    </div>
+</body>
+<script src="client/main.js"></script>
+</html>
