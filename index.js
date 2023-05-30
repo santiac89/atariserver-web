@@ -46,7 +46,7 @@ app.post('/load', (req, res) => {
     }
 
     try {
-        lastChild = spawn('echo', arguments);
+        lastChild = spawn('atariserver', arguments);
 
         lastChild.on('error', function(err) {
             lastChild = null;
