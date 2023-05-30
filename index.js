@@ -25,7 +25,7 @@ app.post('/load', (req, res) => {
     }
 
     console.log(`Loading ${file}`);
-    const child = spawn('atariserver', ['-f', '/dev/ttyAMA0', '-C', '-s', '1', file, '&']);
+    const child = spawn('atariserver', ['-f', '/dev/ttyAMA0', '-C', '-s', '1', '-1', `${process.env.FILES_DIR}/hisioboot-atarisio.atr`,'-2', file, '&']);
 
     child.stderr.on('data', (data) => {
         console.error(`stderr: ${data}`);
