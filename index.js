@@ -42,7 +42,7 @@ app.post('/load', (req, res) => {
     const arguments = ['-f', '/dev/ttyAMA0', '-C'];
 
     if (highspeed)  {
-        arguments.push('-1', `${process.env.FILES_DIR}/hisioboot-atarisio.atr`,'-2', file);
+        arguments.push('s', '1', '-S', '2', '-1', `${process.env.FILES_DIR}/hisioboot-atarisio.atr`,'-2', file);
     } else {
         arguments.push( '-1', file);
     }
