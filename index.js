@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { spawn } = require('child_process');
+const { spawn, exec } = require('child_process');
 const multer  = require('multer')
 const express = require('express');
 const fs = require('fs');
@@ -34,7 +34,7 @@ app.post('/load', (req, res) => {
 
     if (lastChild && !lastChild.killed) {
         console.log(`Killing ${lastChild.pid}`);
-        lastChild.kill();
+        exec(`kill -9 ${lastChild.pid}`);
     }
 
     console.log(`Loading ${file}`);
@@ -42,9 +42,9 @@ app.post('/load', (req, res) => {
     const arguments = ['-f', '/dev/ttyAMA0', '-C'];
 
     if (highspeed)  {
-        arguments.push('-1', `${process.env.FILES_DIR}/hisioboot-atarisio.atr`,'-2', file, '&');
+        arguments.push('-1', `${process.env.FILES_DIR}/hisioboot-atarisio.atr`,'-2', file);
     } else {
-        arguments.push( '-1', file, '&');
+        arguments.push( '-1', file);
     }
 
     try {
