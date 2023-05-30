@@ -12,6 +12,7 @@ app.use(express.static('./public'));
 app.use(express.json());
 
 let lastChild = null;
+let loadingDrive = false;
 
 const upload = multer({ dest: process.env.FILES_DIR })
 
@@ -28,6 +29,7 @@ app.get('/files', (req, res) => {
 })
 
 app.post('/load', (req, res) => {
+    loadingDrive = true;
     const { file, highspeed } = req.body;
 
     if (lastChild && !lastChild.killed) {
@@ -53,8 +55,11 @@ app.post('/load', (req, res) => {
             res.status(500).json({ error: err });
         });
 
-        lastChild.on('spawn', function() {
-            res.json({ pid: lastChild.pid, file, highspeed });
+        lastChild.stdout.on('data', (data) => {
+            if (loadingDrive) {
+                res.json({ pid: lastChild.pid, file, highspeed });
+                loadingDrive = false;
+            }
         });
 
         lastChild.stderr.on('data', (data) => {
