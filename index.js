@@ -20,10 +20,12 @@ app.post('/load', (req, res) => {
     const { file } = req.body;
 
     if (lastPid) {
+        console.log(`Killing ${lastPid}`);
         exec(`kill -9 ${lastPid}`);
     }
 
-    const child = spawn('atariserver ', ['-f', '/dev/ttyAMA0', '-C', '-s', '1', file, '&']);
+    console.log(`Loading ${file}`);
+    const child = spawn('atariserver', ['-f', '/dev/ttyAMA0', '-C', '-s', '1', file, '&']);
 
     child.stderr.on('data', (data) => {
         console.error(`stderr: ${data}`);
